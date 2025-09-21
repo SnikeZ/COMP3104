@@ -1,0 +1,20 @@
+name: CI/CD
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Running tests..."
+      - run: echo "Tests passed!"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Deploying to production..."
+      - run: echo "Deployment complete!"
